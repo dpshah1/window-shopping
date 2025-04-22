@@ -35,3 +35,56 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 # window-shopping
+
+Catalog. 
+Users -> can see the product catalog
+Admin ->  only can add, access through the link. 
+
+Anyone can add products, or one admin
+
+Sign in. 
+
+
+
+Craglist -> for textbooks, stuffs, 
+Product selling platform, scheduling, maybe more complicated. 
+Authentication. 
+
+Specific for berkeley.  For each company. 
+Making account. Only show stuffs. 
+
+Applicable, 
+
+Project Name: Window Shop
+
+My Catalog
+Any Catalog
+Mall Catalog
+Catalog Mall does not flow.
+Window Shopping 
+
+Application Description: 
+WindowShop is a virtual mall for effortless digital window shopping. Businesses can create their own store to showcase products in a clean, catalog-style layout (no checkout, just pure browsing) 
+Visitors land on a homepage filled with storefronts. One click lets them explore any store’s collection, just like strolling through a mall and peeking into windows. All online, no pressure to buy.
+
+
+Features + Tools:
+Easier Design: Tailwind, CSS
+Tech Stack: JavaScript,, HTML, React, Next.Js
+Database for Catalog description and images: FireBase FireStore
+Timeline:
+
+
+As a users, 
+Homepage -> have list a catalog.
+Login to make one
+View one of the company. 
+
+webpage/company_name. 
+
+React router. Netlify. 
+Next.js -> router based. 
+
+Background Mall, catalog of stores, dashboard. 
+
+3D, current product, on the side, there are next store catalogs. 
