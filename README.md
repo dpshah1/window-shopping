@@ -1,3 +1,25 @@
+# window-shopping
+Project Name: Window Shop
+
+Application Description: 
+WindowShop is a virtual mall for effortless digital window shopping. Businesses can create their own store to showcase products in a clean, catalog-style layout (no checkout, just pure browsing) 
+Visitors land on a homepage filled with storefronts. One click lets them explore any store’s collection, just like strolling through a mall and peeking into windows. All online, no pressure to buy.
+
+
+Features + Tools:
+Easier Design: Tailwind, CSS
+Tech Stack: JavaScript,, HTML, React, Next.Js
+Database for Catalog description and images: FireBase FireStore
+
+Timeline:
+- 4/21 Tuesday: Basic UI with Figma
+- 4/24 Thurs: Make Sign in feature, Dashboard
+- 4/28 Mon: Making Catalog
+- 5/1 : Last touch
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -34,57 +56,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# window-shopping
-
-Catalog. 
-Users -> can see the product catalog
-Admin ->  only can add, access through the link. 
-
-Anyone can add products, or one admin
-
-Sign in. 
 
 
-
-Craglist -> for textbooks, stuffs, 
-Product selling platform, scheduling, maybe more complicated. 
-Authentication. 
-
-Specific for berkeley.  For each company. 
-Making account. Only show stuffs. 
-
-Applicable, 
-
-Project Name: Window Shop
-
-My Catalog
-Any Catalog
-Mall Catalog
-Catalog Mall does not flow.
-Window Shopping 
-
-Application Description: 
-WindowShop is a virtual mall for effortless digital window shopping. Businesses can create their own store to showcase products in a clean, catalog-style layout (no checkout, just pure browsing) 
-Visitors land on a homepage filled with storefronts. One click lets them explore any store’s collection, just like strolling through a mall and peeking into windows. All online, no pressure to buy.
-
-
-Features + Tools:
-Easier Design: Tailwind, CSS
-Tech Stack: JavaScript,, HTML, React, Next.Js
-Database for Catalog description and images: FireBase FireStore
-Timeline:
-
-
-As a users, 
-Homepage -> have list a catalog.
-Login to make one
-View one of the company. 
-
-webpage/company_name. 
-
-React router. Netlify. 
-Next.js -> router based. 
-
-Background Mall, catalog of stores, dashboard. 
-
-3D, current product, on the side, there are next store catalogs. 
