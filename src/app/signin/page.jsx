@@ -11,10 +11,8 @@ export default async function StorePage() {
   const database = client.db(dbName);
   const collection = database.collection(collectionName);
 
-  const findQuery = { prepTimeInMinutes: { $lt: 45 } };
-
   try {
-    const cursor = await collection.find();
+    const cursor = await collection.find().toArray();
     await cursor.forEach(store => {
       console.log(`${store.name} store name`);
     });
