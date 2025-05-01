@@ -3,8 +3,8 @@ import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { updateDoc, doc } from "firebase/firestore";
 
 //User
-export async function addUser({ userId, username }) {
-  await addDoc(collection(db, "User"), { user_id: userId, username})
+export async function addUser(userData) {
+  await addDoc(collection(db, "User"), userData);
 }
 
 export async function getAllUsers() {
@@ -15,13 +15,24 @@ export async function getAllUsers() {
   }));
 }
 
+export async function getUserByEmail(email) {
+  const q = query(collection(db, "User"), where("email", "==", email));
+  const snapshot = await getDocs(q);
+
+  if (snapshot.empty) {
+    return null; // or throw an error if you prefer
+  }
+
+  const doc = snapshot.docs[0];
+  return {
+    id: doc.id,       // Firestore document ID
+    ...doc.data()     // User fields: email, password, etc.
+  };
+}
+
 //Catalogue
-export async function addCatalogue({ catalogueId, storeName, ownerId }) {
-  await addDoc(collection(db, "Catalogue"), {
-    catalogue_id: catalogueId,
-    storeName,
-    owner_id: ownerId
-  });
+export async function addCatalogue(catalogueData) {
+  await addDoc(collection(db, "Catalogue"), catalogueData);
 }
 
 export async function getCataloguesByOwner(ownerId) {
@@ -31,14 +42,8 @@ export async function getCataloguesByOwner(ownerId) {
 }
 
 //Products
-export async function addProduct({ catalogueId, productName, productPrice, productImage, productId }) {
-  await addDoc(collection(db, "Product"), {
-    catalogueId,
-    productName,
-    productPrice,
-    productImage,
-    productId
-  });
+export async function addProduct(productData) {
+  await addDoc(collection(db, "Product"), productData);
 }
 
 export async function getProductsByCatalogue(catalogueId) {
@@ -50,7 +55,7 @@ export async function getProductsByCatalogue(catalogueId) {
 //Update
 //User
 export async function updateUser(userId, updatedData) {
-  const q = query(collection(db, "User"), where("user_id", "==", userId));
+  const q = query(collection(db, "User"), where("userId", "==", userId));
   const snapshot = await getDocs(q);
 
   if (snapshot.empty) {
@@ -63,11 +68,11 @@ export async function updateUser(userId, updatedData) {
 
 //Catalogue
 export async function updateCatalogue(catalogueId, updatedData) {
-  const q = query(collection(db, "Catalogue"), where("catalogue_id", "==", catalogueId));
+  const q = query(collection(db, "Catalogue"), where("catalogueId", "==", catalogueId));
   const snapshot = await getDocs(q);
 
   if (snapshot.empty) {
-    throw new Error("Catalogue not found with catalogue_id: " + catalogueId);
+    throw new Error("Catalogue not found with catalogueId: " + catalogueId);
   }
 
   const catalogueRef = snapshot.docs[0].ref;

@@ -22,12 +22,12 @@ export default function Home() {
       try {
         // === USER TEST ===
         const newUserId = Date.now();
-        await addUser({ userId: newUserId, username: "tester_user" });
+        await addUser({ userId: newUserId, username: "user" , password:"1234", email:"example@berkeley.edu"});
 
         const allUsers = await getAllUsers();
         console.log("All Users:", allUsers);
 
-        await updateUser(newUserId, { username: "updated_user" });
+        await updateUser(newUserId, { username: "updated_user", password:"1234", email:"example@berkeley.edu"});
         console.log("Updated user with user_id:", newUserId);
 
         const allUsers1 = await getAllUsers();
