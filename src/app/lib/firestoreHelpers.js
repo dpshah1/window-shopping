@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where, deleteDoc } from "firebase/firestore";
 import { updateDoc, doc } from "firebase/firestore";
 
 //User
@@ -90,6 +90,19 @@ export async function updateProduct(productId, updatedData) {
 
   const productRef = snapshot.docs[0].ref;
   await updateDoc(productRef, updatedData);
+}
+
+//Delete
+export async function deleteAllDocs(collectionName) {
+  const colRef = collection(db, collectionName);
+  const snapshot = await getDocs(colRef);
+
+  const deletions = snapshot.docs.map((document) =>
+    deleteDoc(doc(db, collectionName, document.id))
+  );
+
+  await Promise.all(deletions);
+  console.log(`Deleted all docs in ${collectionName}`);
 }
 
 /* Later to use this inside component:

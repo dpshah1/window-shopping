@@ -35,7 +35,7 @@ export default function Catalogue() {
       {/* Banner */}
       <div className="relative w-full h-60">
         <Image
-          src="/images/shop-banner.jpg"
+          src="/background.png"
           alt="Shop banner"
           layout="fill"
           objectFit="cover"

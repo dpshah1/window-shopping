@@ -14,12 +14,14 @@ import {
   addProduct,
   getProductsByCatalogue,
   updateProduct,
+  deleteAllDocs,
 } from "./lib/firestoreHelpers";
 
 export default function Home() {
   useEffect(() => {
     async function testHelpers() {
       try {
+
         // === USER TEST ===
         const newUserId = Date.now();
         await addUser({ userId: newUserId, username: "user" , password:"1234", email:"example@berkeley.edu"});
@@ -86,7 +88,7 @@ export default function Home() {
       }
     }
 
-    testHelpers();
+    // testHelpers();
   }, []);
 
   return (
