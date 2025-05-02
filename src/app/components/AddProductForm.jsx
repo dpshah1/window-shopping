@@ -13,8 +13,9 @@ import {
   getUserByEmail,
 } from "../lib/firestoreHelpers";
 import { useState } from "react";
-import { storage } from "../lib/firebase";
+import { imgDB } from "../lib/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 // export default function ImageUploader() {
 //   const [file, setFile] = useState(null);
@@ -72,14 +73,22 @@ export default function AddProductForm() {
     let imageUrl = "https://via.placeholder.com/150";
 
     if (imageFile) {
-      const storageRef = ref(
-        storage,
-        `Product/${Date.now()}-${imageFile.name}`
-      );
-      await uploadBytes(storageRef, {});
-      console.log("uploadBytes")
-      // await uploadBytes(storageRef, imageFile);
-      imageUrl = await getDownloadURL(storageRef);
+      try {
+        const safeName = imageFile.name.replace(/\s+/g, "_");
+        const storagePath = `Product/${v4()}-${safeName}`;
+        const fileRef = ref(imgDB, storagePath);
+    
+        console.log("Uploading to:", storagePath);
+        const snapshot = await uploadBytes(fileRef, imageFile);
+        console.log("Upload successful:", snapshot);
+    
+        imageUrl = await getDownloadURL(snapshot.ref);
+        console.log("Download URL:", imageUrl);
+      } catch (uploadErr) {
+        console.error("🔥 Image upload failed:", uploadErr);
+        alert("Image upload failed. Please check your internet connection and try again.");
+        return;
+      }
     }
 
     const productData = {
@@ -192,7 +201,6 @@ export default function AddProductForm() {
     <button
       type="submit"
       className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800"
-      onSubmit={handleSubmit}
     >
       Add Product
     </button>
