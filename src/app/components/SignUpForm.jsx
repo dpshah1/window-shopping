@@ -83,7 +83,7 @@ export default function SignInForm() {
       userId: userId,
       username: storeName,
       email: email,
-      password: password
+      password: password, 
     };
     await addUser(newUser);
 
