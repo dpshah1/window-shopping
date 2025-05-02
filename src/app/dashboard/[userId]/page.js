@@ -2,6 +2,7 @@ import Layout from "../../layout";
 import Image from "next/image";
 import AddProductForm from "../../components/AddProductForm";
 import StoreCatalogueLink from "../../components/StoreCatalogueLink";
+import ProductPreview from "../../components/ProductPreview";
 export default function Dashboard() {
 
   return (
@@ -42,45 +43,8 @@ export default function Dashboard() {
              
             </div>
 
-            {/* Product Preview */}
-            <div>
-              <h3 className="text-lg font-bold mb-4">Product Preview</h3>
-              <div className="space-y-4">
-                {/* Product Card */}
-                <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-                  <h4 className="font-bold">Acoustic Guitar</h4>
-                  <p className="text-sm text-gray-600">
-                    Warm-toned wooden guitar perfect for beginners or seasoned players. Great for
-                    home sessions or live performances.
-                  </p>
-                  <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Edit
-                  </button>
-                </div>
 
-                <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-                  <h4 className="font-bold">Jean Jacket</h4>
-                  <p className="text-sm text-gray-600">
-                    Classic denim jacket with a timeless fit. Versatile layering piece for any
-                    casual outfit.
-                  </p>
-                  <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Edit
-                  </button>
-                </div>
-
-                <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-                  <h4 className="font-bold">Sofa</h4>
-                  <p className="text-sm text-gray-600">
-                    Modern 3-seater sofa with soft fabric and minimal design. Adds comfort and style
-                    to any living room.
-                  </p>
-                  <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Edit
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ProductPreview />
           </div>
         </section>
       </div>

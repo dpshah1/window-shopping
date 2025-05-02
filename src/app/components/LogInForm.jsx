@@ -46,9 +46,12 @@ export default function LogInForm() {
         alert("Incorrect password.");
         return;
       }
-
       const userId = userData.userId;
+
+      localStorage.setItem("userId", userId);
       router.push(`/dashboard/${userId}`);
+      console.log(localStorage.getItem("userId"), "in local storage");
+
     } catch (error) {
       console.error("Sign-in error:", error);
       alert("Something went wrong. Please try again.");
