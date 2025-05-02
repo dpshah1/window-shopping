@@ -24,6 +24,12 @@ export default function AddProductForm() {
       const productName = e.target.productName.value.trim();
       const description = e.target.description.value.trim();
       const productPrice = parseFloat(e.target.productPrice.value);
+
+      if (description.length > 70){
+        alert(`Descriptions are reserved to 70 characters or less \n
+           Your current description sits at ${description.length}`)
+           return;
+      }
   
       if (!productName || !description || isNaN(productPrice)) {
         alert("Please fill out all fields.");

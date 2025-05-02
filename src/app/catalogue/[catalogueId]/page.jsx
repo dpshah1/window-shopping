@@ -31,7 +31,7 @@ const products = [
 
 export default function Catalogue() {
   return (
-    <Layout>
+    <div>
       {/* Banner */}
       <div className="relative w-full h-60">
         <Image
@@ -83,6 +83,6 @@ export default function Catalogue() {
           </button>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
