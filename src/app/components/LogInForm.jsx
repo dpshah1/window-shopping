@@ -20,14 +20,14 @@ export default function LogInForm() {
 
     //just to check the usersf
     const allUsers = await getAllUsers();
-    console.log("All Users:", allUsers);
+    // console.log("All Users:", allUsers);
 
     const formData = new FormData(e.target);
     const email = formData.get("email")?.trim();
     const password = formData.get("password")?.trim();
     
-    console.log(email, "email")
-    console.log(password, "password")
+    // console.log(email, "email")
+    // console.log(password, "password")
     // 🚫 Check for empty fields
     if (!email || !password) {
       alert("Please enter both email and password.");
