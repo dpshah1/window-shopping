@@ -1,7 +1,9 @@
 import Layout from "../../layout";
 import Image from "next/image";
 import AddProductForm from "../../components/AddProductForm";
+import StoreCatalogueLink from "../../components/StoreCatalogueLink";
 export default function Dashboard() {
+
   return (
     <main className="p-8 bg-[url('/mall.png')] bg-cover bg-center min-h-screen">
       <div className="flex gap-6">
@@ -25,10 +27,8 @@ export default function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Store Catalogue
-              </a>
-            </li>
+              <StoreCatalogueLink />
+            </li> 
           </ul>
         </aside>
 
