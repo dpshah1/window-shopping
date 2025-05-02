@@ -6,7 +6,7 @@ import { getProductsByCatalogue, getCatalogueById } from "../lib/firestoreHelper
 
 
 
-const storeProducts = () => {
+export default function ProductPreview () {
   const [products, setProducts] = useState([]);
   const params = useParams();
   const catalogueId  = params.catalogueId;
@@ -70,48 +70,6 @@ const storeProducts = () => {
             ))}
         </div>
       </div>
-      {/* Pagination */}
-      <div className="flex justify-center mt-10 space-x-2">
-        <button className="text-black px-4 py-2 border rounded bg-gray-100">1</button>
-        <button className="text-black px-4 py-2 border rounded bg-gray-100">2</button>
-        <button className="text-black px-4 py-2 border rounded bg-gray-100">3</button>
-        <button className="text-black px-4 py-2 border rounded bg-gray-100">Next</button>
-      </div>
-      {/* Add Product Button */}
-      <div className="flex justify-end mt-8">
-        <button onClick={handleAddProduct} className="bg-[#C89F85] text-white font-semibold px-6 py-3 rounded-md">
-          Add Product
-        </button>
-      </div>
     </>
   );
 }
-
-const mockProducts = [
-  {
-    name: "Syltherine",
-    desc: "Stylish cafe chair",
-    price: 40,
-    image: "/images/chair1.jpg",
-  },
-  {
-    name: "Leviosa",
-    desc: "Modern white chair",
-    price: 60,
-    image: "/images/chair2.jpg",
-  },
-  {
-    name: "Lolito",
-    desc: "Luxury sofa",
-    price: 700,
-    image: "/images/sofa.jpg",
-  },
-  {
-    name: "Respira",
-    desc: "Outdoor table and stool",
-    price: 500,
-    image: "/images/livingroom.jpg",
-  },
-];
-
-export default storeProducts
