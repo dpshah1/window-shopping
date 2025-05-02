@@ -5,15 +5,3 @@ const hashPassword = (password) => {
 }
 
 export default hashPassword
-
-const original = 'password'
-const hashed = hashPassword(original)
-
-console.log(original)
-console.log(hashed)
-
-const second = 'jungmin'
-const secondhash = hashPassword(second)
-
-console.log(second)
-console.log(secondhash)

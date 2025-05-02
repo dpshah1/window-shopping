@@ -13,6 +13,8 @@ import {
   getUserByEmail
 } from "../lib/firestoreHelpers";
 
+import hashPassword from "./hashPassword";
+
 export default function LogInForm() {
   const router = useRouter();
   const handleSubmit = async (e) => {
@@ -24,10 +26,8 @@ export default function LogInForm() {
 
     const formData = new FormData(e.target);
     const email = formData.get("email")?.trim();
-    const password = formData.get("password")?.trim();
-    
-    console.log(email, "email")
-    console.log(password, "password")
+    const password = hashPassword(formData.get("password")?.trim());
+
     // 🚫 Check for empty fields
     if (!email || !password) {
       alert("Please enter both email and password.");

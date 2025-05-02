@@ -12,6 +12,7 @@ import {
   updateProduct,
   getUserByEmail
 } from "../lib/firestoreHelpers";
+import hashPassword from "./hashPassword";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -20,8 +21,8 @@ export default function SignInForm() {
 
     const storeName = e.target.storeName.value.trim();
     const email = e.target.email.value.trim();
-    const password = e.target.password.value;
-    const repeatPassword = e.target.repeatPassword.value;
+    const password = hashPassword(e.target.password.value);
+    const repeatPassword = hashPassword(e.target.repeatPassword.value);
 
     // Basic validation
     if (!storeName || !email || !password || !repeatPassword) {
@@ -47,7 +48,7 @@ export default function SignInForm() {
       user_id: userId,
       username: storeName,
       email: email,
-      password: password, // ⚠️ In real apps, hash this!
+      password: password
     };
     await addUser(newUser);
 
