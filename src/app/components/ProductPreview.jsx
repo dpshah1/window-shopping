@@ -2,74 +2,69 @@
 import {useState, useEffect} from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { getProductsByCatalogue, getCatalogueById } from "../lib/firestoreHelpers";
+import { getProductsByCatalogue, getCatalogueById, getCataloguesByOwner } from "../lib/firestoreHelpers";
 
 
 
-export default function ProductPreview () {
-  const [products, setProducts] = useState([]);
-  const params = useParams();
-  const catalogueId  = params.catalogueId;
-  const router = useRouter();
-  let ownerId;
-  useEffect(() => {
-    if (!catalogueId) {
-      alert("Catalogue ID not found");
-      return;
-    }
+export default function ProductPreview() {
+    const [products, setProducts] = useState([]);
+    const params = useParams();
+    const userId = params?.userId;
   
-    (async () => {
-      try {
-        const fetched = await getProductsByCatalogue(catalogueId);
-        setProducts(fetched);
-        console.log(fetched)
-      } catch (err) {
-        console.log("Failed loading products:", err);
-      }
-      try {
-        const fetched = await getCatalogueById(catalogueId);
-        ownerId = fetched[0].ownerId
-      } catch (err) {
-        console.log("Failed loading products:", err);
-      }
-    })();
-  }, []);
-
-  const handleAddProduct = async () => {
-    const catalogueId = params?.catalogueId;
-
-    const catalogue = await getCatalogueById(catalogueId);
-    const userId = catalogue[0].ownerId
-
-    if (!userId) {
-      alert("User ID not found");
-      return;
-    }
-
-    router.push(`/dashboard/${userId}`)
-  };
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+            console.log(userId)
+          if (!userId) {
+            alert("User ID not found.");
+            return;
+          }
+  
+          const catalogues = await getCataloguesByOwner(userId);
+          if (!catalogues || catalogues.length === 0) {
+            alert("No catalogues found.");
+            return;
+          }
+          console.log(catalogues);
+  
+          const catalogueId = catalogues[0].catalogueId;
+          const fetchedProducts = await getProductsByCatalogue(catalogueId);
+          setProducts(fetchedProducts);
+          console.log("Fetched products:", fetchedProducts);
+        } catch (err) {
+          console.error("Error loading catalogue or products:", err);
+        }
+      };
+  
+      fetchData();
+    }, [userId]);
 
   return(
     <>
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <div className="grid grid-cols-4 gap-6">
-          {products
-            .map((product, index) => (
-              <div key={index} className="bg-white border p-4 rounded shadow-sm">
-                <Image
-                  src={product.productImage}
-                  alt={product.productName}
-                  width={300}
-                  height={300}
-                  className="w-full h-64 object-cover mb-2"
-                />
-                <h3 className="text-black font-semibold text-lg">{product.productName}</h3>
-                <p className="text-gray-500 text-sm">{product.description}</p>
-                <p className="text-black font-bold mt-1">${product.productPrice}</p>
-              </div>
+    <div className="w-[250px] max-h-[600px] overflow-y-auto overflow-x-hidden -mx-1 py-1 mt-[-9px]">
+        <h3 className="text-lg font-bold mb-4">Product Preview</h3>
+        <div className="space-y-4 w-[230px]">
+            {products.map((product, index) => (
+             <div
+             key={index}
+             className="bg-white p-3 shadow-sm rounded w-full h-[120px] flex gap-4 items-start "
+           >
+             <Image
+               src={product.productImage}
+               alt={product.productName}
+               width={80}
+               height={80}
+               className="rounded object-cover"
+             />
+             <div className="flex flex-col justify-between">
+               <h3 className="text-black font-semibold text-sm">{product.productName}</h3>
+               <p className="text-gray-600 text-xs truncate w-[150px]">{product.description}</p>
+               <p className="text-black font-bold text-sm">${product.productPrice}</p>
+             </div>
+           </div>
             ))}
         </div>
-      </div>
+    </div>
     </>
   );
 }
