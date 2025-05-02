@@ -40,7 +40,7 @@ export default function Catalogue() {
           layout="fill"
           objectFit="cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
           <h1 className="text-3xl font-bold">Shop A</h1>
           <p className="text-lg">This is the Shop description</p>
         </div>
