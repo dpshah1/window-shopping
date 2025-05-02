@@ -2,6 +2,7 @@
   "name": "window-shopping",
   "version": "0.1.0",
   "private": true,
+  "type" : "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "firebase": "^11.6.1",
     "mongodb": "^6.16.0",
     "mongoose": "^8.13.3",
     "next": "15.3.1",

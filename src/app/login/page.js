@@ -7,9 +7,7 @@ export default function Login() {
     <main className="p-8 bg-[url('/mall.png')] bg-cover bg-center min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-6">Log In</h2>
-        <LogInForm />
-
-        {/* Additional Links */}
+        <LogInForm/>
         <div className="mt-4 text-center">
           <p className="text-sm">
             New Member? <a href="/signup" className="text-blue-500 hover:underline">Sign Up</a>
