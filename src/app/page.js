@@ -20,7 +20,7 @@ import {
 
 export default function Home() {
 
-  const [catalogues, setCatalogues] = useState(null);
+  const [catalogues, setCatalogues] = useState([]);
 
   useEffect(()=>{
           (async () => {
@@ -43,15 +43,15 @@ export default function Home() {
           {catalogues.map((catalogue, index) => (
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <Image
-              src="/store1.png" // Replace with your image path
+              src={catalogue.bannerImage} // Replace with your image path
               alt="Clothing Store"
               width={400}
               height={300}
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <h3 className="text-lg font-bold">Clothing Store</h3>
-              <p className="text-gray-600">Selling Best Clothes</p>
+              <h3 className="text-lg font-bold">{catalogue.storeName}</h3>
+              <p className="text-gray-600">{catalogue.description}</p>
             </div>
           </div>
           ))
