@@ -22,7 +22,7 @@ export default function LogInForm() {
 
     //just to check the usersf
     const allUsers = await getAllUsers();
-    console.log("All Users:", allUsers);
+    // console.log("All Users:", allUsers);
 
     const formData = new FormData(e.target);
     const email = formData.get("email")?.trim();

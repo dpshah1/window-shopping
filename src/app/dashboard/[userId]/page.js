@@ -1,5 +1,6 @@
 import Layout from "../../layout";
 import Image from "next/image";
+import AddProductForm from "../../components/AddProductForm";
 export default function Dashboard() {
   return (
     <main className="p-8 bg-[url('/mall.png')] bg-cover bg-center min-h-screen">
@@ -35,76 +36,10 @@ export default function Dashboard() {
         <section className="bg-white shadow-lg rounded-lg p-6 flex-1">
           <h2 className="text-2xl font-bold mb-6">Admin DashBoard</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Add New Product Form */}
             <div>
               <h3 className="text-lg font-bold mb-4">Add New Product</h3>
-              <form className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="productName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Product Name
-                  </label>
-                  <input
-                    type="text"
-                    id="productName"
-                    placeholder="Enter product name"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="productImages"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Product Images
-                  </label>
-                  <div className="mt-1 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md p-4">
-                    <p className="text-gray-500">Drag and drop images here, or click to upload</p>
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    id="description"
-                    placeholder="Enter product description"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  ></textarea>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="category"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Category
-                  </label>
-                  <select
-                    id="category"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option>Select Category</option>
-                    <option>Electronics</option>
-                    <option>Clothing</option>
-                    <option>Furniture</option>
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800"
-                >
-                  Add Product
-                </button>
-              </form>
+              <AddProductForm />
+             
             </div>
 
             {/* Product Preview */}
