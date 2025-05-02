@@ -112,7 +112,6 @@ const mockProducts = [
     price: 500,
     image: "/images/livingroom.jpg",
   },
-  // Repeat for pagination mock-up
 ];
 
 export default storeProducts

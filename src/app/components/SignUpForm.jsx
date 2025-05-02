@@ -1,4 +1,4 @@
-"use client"; // This makes the component a client component
+"use client";
 import { useRouter } from "next/navigation";
 import {
   addUser,
@@ -13,13 +13,21 @@ import {
   getUserByEmail
 } from "../lib/firestoreHelpers";
 import hashPassword from "./hashPassword";
+import {useState} from "react"
+import { imgDB } from "../lib/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 export default function SignInForm() {
   const router = useRouter();
+  const [imageFile, setImageFile] = useState(null);
+  let bannerUrl = "https://drive.google.com/file/d/1DVCb-HSh3g9P_hIdMKVvB6CgkOW3BOE8/view?usp=sharing"
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const storeName = e.target.storeName.value.trim();
+    const storeDescription = e.target.storeDescription.value.trim();
     const email = e.target.email.value.trim();
     const password = hashPassword(e.target.password.value);
     const repeatPassword = hashPassword(e.target.repeatPassword.value);
@@ -27,6 +35,15 @@ export default function SignInForm() {
     // Basic validation
     if (!storeName || !email || !password || !repeatPassword) {
       alert("Please fill in all fields.");
+      return;
+    }
+
+    console.log(storeDescription)
+    console.log(storeDescription.length)
+
+    if (storeDescription.length > 250){
+      alert(`Description must be smaller than 250 characters.
+            \n Currently sitting at ${storeDescription.length}.`);
       return;
     }
 
@@ -40,6 +57,24 @@ export default function SignInForm() {
     if (existingUser) {
       alert("Email already in use.");
       return;
+    }
+
+    if (imageFile) {
+      try {
+        const safeName = imageFile.name.replace(/\s+/g, "_");
+        const storagePath = `Banner/${v4()}-${safeName}`;
+        const fileRef = ref(imgDB, storagePath);
+    
+        console.log("Uploading to:", storagePath);
+        const snapshot = await uploadBytes(fileRef, imageFile);
+        console.log("Upload successful:", snapshot);
+        bannerUrl = await getDownloadURL(snapshot.ref);
+        console.log("Download URL:", bannerUrl);
+      } catch (uploadErr) {
+        console.error("🔥 Image upload failed:", uploadErr);
+        alert("Image upload failed. Please check your internet connection and try again.");
+        return;
+      }
     }
 
     // Create new user
@@ -56,6 +91,8 @@ export default function SignInForm() {
     await addCatalogue({
       catalogueId: Date.now().toString(),
       storeName: storeName,
+      description: storeDescription,
+      bannerImage: bannerUrl,
       ownerId: userId,
     });
 
@@ -74,7 +111,19 @@ export default function SignInForm() {
               type="text"
               id="storeName"
               placeholder="Enter your store name"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          {/* Store Name Input */}
+          <div>
+            <label htmlFor="storeName" className="block text-sm font-medium text-gray-700">
+              Store Description
+            </label>
+            <input
+              type="text"
+              id="storeDescription"
+              placeholder="Enter description"
+              className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -87,8 +136,32 @@ export default function SignInForm() {
               type="email"
               id="email"
               placeholder="Enter your email"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
+          </div>
+
+          {/* Image Input */}
+          <div>
+            <label
+              htmlFor="productImages"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Banner Image
+            </label>
+
+            <input
+              type="file"
+              accept="image/*"
+              id="productImage"
+              className="mt-1 block w-full text-sm text-gray-500"
+              onChange={(e) => setImageFile(e.target.files[0])}
+            />
+
+            <div className="mt-1 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md p-4">
+              <p className="text-gray-500">
+                Drag and drop images here, or click to upload
+              </p>
+            </div>
           </div>
 
           {/* Password Input */}
@@ -100,7 +173,7 @@ export default function SignInForm() {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -113,11 +186,11 @@ export default function SignInForm() {
               type="password"
               id="repeatPassword"
               placeholder="Repeat your password"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          {/* Sign Up Button */}
+          {/*Sign Up Button */}
           <button
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800"
@@ -126,4 +199,4 @@ export default function SignInForm() {
           </button>
         </form>
   );
-};
+}

@@ -1,4 +1,4 @@
-"use client"; // This makes the component a client component
+"use client";
 import { useRouter, useParams } from "next/navigation";
 import {
   addUser,
