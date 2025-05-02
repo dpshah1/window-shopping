@@ -36,7 +36,7 @@ export async function addCatalogue(catalogueData) {
 }
 
 export async function getCataloguesByOwner(ownerId) {
-  const q = query(collection(db, "Catalogue"), where("owner_id", "==", ownerId));
+  const q = query(collection(db, "Catalogue"), where("ownerId", "==", ownerId));
   const snapshot = await getDocs(q);
   return snapshot.docs.map(doc => doc.data());
 }
@@ -59,7 +59,7 @@ export async function updateUser(userId, updatedData) {
   const snapshot = await getDocs(q);
 
   if (snapshot.empty) {
-    throw new Error("User not found with user_id: " + userId);
+    throw new Error("User not found with userId: " + userId);
   }
 
   const docRef = snapshot.docs[0].ref; // the Firestore document reference
