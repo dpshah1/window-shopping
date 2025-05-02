@@ -57,7 +57,7 @@ const storeProducts = () => {
             .map((product, index) => (
               <div key={index} className="bg-white border p-4 rounded shadow-sm">
                 <Image
-                  src={"/images/chair1.jpg"}
+                  src={product.productImage}
                   alt={product.productName}
                   width={300}
                   height={300}
