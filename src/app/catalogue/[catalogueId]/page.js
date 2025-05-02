@@ -31,11 +31,11 @@ const products = [
 
 export default function Catalogue() {
   return (
-    <Layout>
+    <div>
       {/* Banner */}
       <div className="relative w-full h-60">
         <Image
-          src="/images/shop-banner.jpg"
+          src="/background.png"
           alt="Shop banner"
           layout="fill"
           objectFit="cover"
@@ -83,6 +83,6 @@ export default function Catalogue() {
           </button>
         </div>
       </div>
-    </Layout>
+      </div>
   );
 }
