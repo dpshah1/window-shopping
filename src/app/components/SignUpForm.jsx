@@ -45,7 +45,7 @@ export default function SignInForm() {
     // Create new user
     const userId = Date.now().toString(); // Simple unique ID
     const newUser = {
-      user_id: userId,
+      userId: userId,
       username: storeName,
       email: email,
       password: password
