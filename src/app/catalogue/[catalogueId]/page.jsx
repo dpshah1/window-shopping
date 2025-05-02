@@ -1,33 +1,7 @@
 import Layout from "../../layout";
 import Image from "next/image";
-
-const products = [
-  {
-    name: "Syltherine",
-    desc: "Stylish cafe chair",
-    price: 40,
-    image: "/images/chair1.jpg",
-  },
-  {
-    name: "Leviosa",
-    desc: "Modern white chair",
-    price: 60,
-    image: "/images/chair2.jpg",
-  },
-  {
-    name: "Lolito",
-    desc: "Luxury sofa",
-    price: 700,
-    image: "/images/sofa.jpg",
-  },
-  {
-    name: "Respira",
-    desc: "Outdoor table and stool",
-    price: 500,
-    image: "/images/livingroom.jpg",
-  },
-  // Repeat for pagination mock-up
-];
+import Products from "../Products"
+import Banner from "../Banner";
 
 export default function Catalogue() {
   return (
