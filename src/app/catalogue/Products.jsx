@@ -4,15 +4,13 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { getProductsByCatalogue, getCatalogueById } from "../lib/firestoreHelpers";
 
-const handleAddProduct = async () => {
-  const router = useRouter();
-  router.push(`/dashboard/${ownerId}`)
-};
+
 
 const storeProducts = () => {
   const [products, setProducts] = useState([]);
   const params = useParams();
   const catalogueId  = params.catalogueId;
+  const router = useRouter();
   let ownerId;
   useEffect(() => {
     if (!catalogueId) {
@@ -36,6 +34,21 @@ const storeProducts = () => {
       }
     })();
   }, []);
+
+  const handleAddProduct = async () => {
+    const catalogueId = params?.catalogueId;
+
+    const catalogue = await getCatalogueById(catalogueId);
+    const userId = catalogue[0].ownerId
+
+    if (!userId) {
+      alert("User ID not found");
+      return;
+    }
+
+    router.push(`/dashboard/${userId}`)
+  };
+
   return(
     <>
       <div className="max-w-6xl mx-auto px-4 py-10">

@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "windowshop-cd3d9",
+    "windowshop": "windowshop-cd3d9"
+  },
+  "targets": {},
+  "etags": {}
+}
