@@ -23,6 +23,11 @@ export default function Dashboard() {
                 Store Settings
               </a>
             </li>
+            <li>
+              <a href="#" className="text-blue-500 hover:underline">
+                Store Catalogue
+              </a>
+            </li>
           </ul>
         </aside>
 
