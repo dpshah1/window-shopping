@@ -4,7 +4,7 @@ import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: `${process.env.FIREBASE_API_KEY}`,
   authDomain: "windowshop-cd3d9.firebaseapp.com",
   projectId: "windowshop-cd3d9",
   storageBucket: "windowshop-cd3d9.appspot.com", 

@@ -30,7 +30,7 @@ function Banner() {
     <>
       <div className="relative w-full h-60">
         <Image
-          src="/images/chair1.jpg"
+          src="/images/background.png"
           alt="Shop banner"
           layout="fill"
           objectFit="cover"
