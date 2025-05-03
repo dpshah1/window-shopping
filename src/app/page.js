@@ -1,88 +1,55 @@
-"use client";
-
+"use client"; // This makes the component a client component
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "./lib/firebase";
+import { useEffect, useMemo, useState } from "react";
+import Fuse from "fuse.js";
 import {
-  addUser,
   getAllUsers,
-  updateUser,
-  addCatalogue,
   getCataloguesByOwner,
   updateCatalogue,
   addProduct,
   getProductsByCatalogue,
   updateProduct,
-  deleteAllDocs,
+  addUser,
+  updateUser,
+  addCatalogue,
 } from "./lib/firestoreHelpers";
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [stores] = useState([
+    {
+      name: "Clothing Store",
+      description: "Selling Best Clothes",
+      image: "/store1.png",
+    },
+    {
+      name: "Electronics Store",
+      description: "Latest gadgets and devices",
+      image: "/store2.png",
+    },
+    {
+      name: "Home Decor",
+      description: "Stylish furniture and lighting",
+      image: "/store3.png",
+    },
+  ]);
+
+  // Memoize Fuse instance for performance
+  const fuse = useMemo(() => {
+    return new Fuse(stores, {
+      keys: ["name", "description"],
+      threshold: 0.5, // Lower = stricter matching
+    });
+  }, [stores]);
+
+  const filteredStores = searchQuery
+    ? fuse.search(searchQuery).map((result) => result.item)
+    : stores;
+
   useEffect(() => {
     async function testHelpers() {
       try {
-
-        // === USER TEST ===
-        // const newUserId = Date.now();
-        // await addUser({ userId: newUserId, username: "user" , password:"1234", email:"example@berkeley.edu"});
-
-        // const allUsers = await getAllUsers();
-        // console.log("All Users:", allUsers);
-
-        // await updateUser(newUserId, { username: "updated_user", password:"1234", email:"example@berkeley.edu"});
-        // console.log("Updated user with user_id:", newUserId);
-
-        // const allUsers1 = await getAllUsers();
-        // console.log("All Users:", allUsers1);
-
-        // === CATALOGUE TEST ===
-        // const newCatalogueId = newUserId + 1;
-        // await addCatalogue({
-        //   catalogueId: newCatalogueId,
-        //   storeName: "Original Store",
-        //   ownerId: newUserId,
-        // });
-
-        // const catalogues = await getCataloguesByOwner(newUserId);
-        // console.log("Catalogues for user:", newUserId, catalogues);
-
-        // await updateCatalogue(newCatalogueId, {
-        //   storeName: "Updated Store Name",
-        // });
-        // console.log("Updated catalogue with catalogue_id:", newCatalogueId);
-
-        // const catalogues1 = await getCataloguesByOwner(newUserId);
-        // console.log("Catalogues for user:", newUserId, catalogues1);
-
-        // === PRODUCT TEST ===
-        // const newProductId = newCatalogueId + 1;
-        // await addProduct({
-        //   productId: newProductId,
-        //   catalogueId: newCatalogueId,
-        //   productName: "Original Product",
-        //   productPrice: 25.0,
-        //   productImage: "https://via.placeholder.com/150",
-        // });
-
-        // const catalogueProducts = await getProductsByCatalogue(newCatalogueId);
-        // console.log(
-        //   "Products in catalogue:",
-        //   newCatalogueId,
-        //   catalogueProducts
-        // );
-
-        // await updateProduct(newProductId, {
-        //   productName: "Updated Product",
-        //   productPrice: 19.99,
-        // });
-        // console.log("Updated product with productId:", newProductId);
-
-        // const catalogueProducts1 = await getProductsByCatalogue(newCatalogueId);
-        // console.log(
-        //   "Products in catalogue:",
-        //   newCatalogueId,
-        //   catalogueProducts1
-        // );
+        // Optional: test Firestore helpers
       } catch (err) {
         console.error("Error testing firestore helpers:", err);
       }
@@ -93,53 +60,46 @@ export default function Home() {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      {/* Main Content */}
       <main className="p-8 bg-[url('/mall.png')] bg-cover bg-center min-h-screen">
         <h2 className="text-3xl font-bold text-center mb-8">Pick Your Store</h2>
+
+        {/* Search Input */}
+        <div className="flex justify-center mb-6">
+          <input
+            type="text"
+            placeholder="Search stores..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-4 py-2 w-full max-w-md rounded-md border shadow-sm"
+          />
+        </div>
+
+        {/* Store Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Store Card */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image
-              src="/store1.png" // Replace with your image path
-              alt="Clothing Store"
-              width={400}
-              height={300}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-bold">Clothing Store</h3>
-              <p className="text-gray-600">Selling Best Clothes</p>
+          {filteredStores.map((store, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-lg overflow-hidden"
+            >
+              <Image
+                src={store.image}
+                alt={store.name}
+                width={400}
+                height={300}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">{store.name}</h3>
+                <p className="text-gray-600">{store.description}</p>
+              </div>
             </div>
-          </div>
+          ))}
 
-          {/* Repeat Store Cards */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image
-              src="/store2.png" // Replace with your image path
-              alt="Clothing Store"
-              width={400}
-              height={300}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-bold">Clothing Store</h3>
-              <p className="text-gray-600">Selling Best Clothes</p>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image
-              src="/store3.png" // Replace with your image path
-              alt="Clothing Store"
-              width={400}
-              height={300}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-bold">Clothing Store</h3>
-              <p className="text-gray-600">Selling Best Clothes</p>
-            </div>
-          </div>
+          {filteredStores.length === 0 && (
+            <p className="text-center col-span-full text-gray-500">
+              No stores found.
+            </p>
+          )}
         </div>
       </main>
     </div>
