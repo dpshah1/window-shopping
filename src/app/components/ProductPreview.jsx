@@ -41,9 +41,9 @@ export default function ProductPreview() {
 
   return(
     <>
-    <div className="w-[250px] max-h-[600px] overflow-y-auto overflow-x-hidden -mx-1 py-1 mt-[-9px]">
+    <div className="w-[600px] max-h-[600px] overflow-y-auto overflow-x-hidden -mx-1 py-1 mt-[-9px]">
         <h3 className="text-lg font-bold mb-4">Product Preview</h3>
-        <div className="space-y-4 w-[230px]">
+        <div className="space-y-4 w-[450px]">
             {products.map((product, index) => (
              <div
              key={index}
