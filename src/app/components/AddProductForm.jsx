@@ -124,7 +124,7 @@ export default function AddProductForm() {
           type="text"
           id="productName"
           placeholder="Enter product name"
-          className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
 
@@ -161,7 +161,7 @@ export default function AddProductForm() {
         <textarea
           id="description"
           placeholder="Enter product description"
-          className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="text-gray-500 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         ></textarea>
       </div>
       <div>
@@ -176,7 +176,7 @@ export default function AddProductForm() {
           step="0.01"
           id="productPrice"
           placeholder="Enter product price"
-          className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="text-gray-500	mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
       {/* TODO, implement category and maybe make filter in the future */}

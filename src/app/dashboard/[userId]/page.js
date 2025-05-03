@@ -10,7 +10,7 @@ export default function Dashboard() {
       <div className="flex gap-6">
         {/* Sidebar */}
         <aside className="bg-white shadow-lg rounded-lg p-4 w-1/4">
-          <h3 className="text-lg font-bold mb-4">Dashboard</h3>
+          <h3 className="text-black text-lg font-bold mb-4">Dashboard</h3>
           <ul className="space-y-2">
             <li>
               <a href="#" className="text-blue-500 hover:underline">
@@ -35,10 +35,10 @@ export default function Dashboard() {
 
         {/* Main Content */}
         <section className="bg-white shadow-lg rounded-lg p-6 flex-1">
-          <h2 className="text-2xl font-bold mb-6">Admin DashBoard</h2>
+          <h2 className="text-black text-2xl font-bold mb-6">Admin DashBoard</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-bold mb-4">Add New Product</h3>
+              <h3 className="text-black text-lg font-bold mb-4">Add New Product</h3>
               <AddProductForm />
              
             </div>
