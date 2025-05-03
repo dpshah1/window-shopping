@@ -36,6 +36,7 @@ function Banner() {
           alt="Shop banner"
           layout="fill"
           objectFit="cover"
+           className="brightness-75"
         />
         <div className="absolute inset-0 bg-opacity-50 flex flex-col justify-center items-center text-white">
           <h1 className="text-3xl font-bold">{catalogue.storeName}</h1>
