@@ -40,6 +40,11 @@ export async function getCataloguesByOwner(ownerId) {
   const snapshot = await getDocs(q);
   return snapshot.docs.map(doc => doc.data());
 }
+export async function getCatalogues() {
+  const q = query(collection(db, "Catalogue"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => doc.data());
+}
 export async function getCatalogueById(catalogueId) {
   const q = query(collection(db, "Catalogue"), where("catalogueId", "==", catalogueId));
   const snapshot = await getDocs(q);
