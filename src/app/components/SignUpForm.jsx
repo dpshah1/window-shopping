@@ -21,11 +21,10 @@ import { v4 } from "uuid";
 export default function SignInForm() {
   const router = useRouter();
   const [imageFile, setImageFile] = useState(null);
-  let bannerUrl = "https://drive.google.com/file/d/1DVCb-HSh3g9P_hIdMKVvB6CgkOW3BOE8/view?usp=sharing"
+  let bannerUrl = "https://firebasestorage.googleapis.com/v0/b/windowshop-cd3d9.firebasestorage.app/o/Banner%2F9f5ad391-3a8e-4b44-94a5-c108ecf78f39-background.png?alt=media&token=d597843e-e0c5-45d0-829b-c3f3e0ca6142"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const storeName = e.target.storeName.value.trim();
     const storeDescription = e.target.storeDescription.value.trim();
     const email = e.target.email.value.trim();
@@ -68,6 +67,7 @@ export default function SignInForm() {
         console.log("Uploading to:", storagePath);
         const snapshot = await uploadBytes(fileRef, imageFile);
         console.log("Upload successful:", snapshot);
+
         bannerUrl = await getDownloadURL(snapshot.ref);
         console.log("Download URL:", bannerUrl);
       } catch (uploadErr) {

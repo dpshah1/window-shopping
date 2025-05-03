@@ -28,3 +28,11 @@ body {
 button:hover{
   cursor: pointer;
 }
+
+.catalog-card{
+  cursor: pointer;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}

@@ -20,14 +20,15 @@ export default function LoginButton() {
     setIsLoggedIn(false); // force re-render
   };
 
-  return isLoggedIn ? (
-    <button
-      className="text-blue-500 font-semibold mr-4"
-      onClick={handleLogout}
-    >
-      Log Out
-    </button>
-  ) : (
+  return (
+  // isLoggedIn ? (
+  //   <button
+  //     className="text-blue-500 font-semibold mr-4"
+  //     onClick={handleLogout}
+  //   >
+  //     Log Out
+  //   </button>
+  // ) : (
     <button
       className="text-blue-500 font-semibold mr-4"
       onClick={() => {router.push("/login")}}
