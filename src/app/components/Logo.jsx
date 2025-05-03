@@ -7,11 +7,11 @@ export default function LoginButton() {
 
   return (
     <Image
-    src="/logo.png" // Replace with your logo path
-    alt="Window Shop Logo"
-    width={80}
-    height={80}
-    onClick={() => router.push("/")}
-  />
+      src="/logo.png" // Replace with your logo path
+      alt="Window Shop Logo"
+      width={80}
+      height={80}
+      onClick={() => router.push("/")}
+    />
   );
 }

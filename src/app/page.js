@@ -17,10 +17,17 @@ import {
   deleteAllDocs,
   getCatalogues
 } from "./lib/firestoreHelpers";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
-  const [catalogues, setCatalogues] = useState(null);
+  const [catalogues, setCatalogues] = useState([]);
+  const router = useRouter();
+
+  const handleClickCatalog = (id) => {
+    router.push(`/catalogue/${id}`);
+    console.log(`You clicked: ${id}`)
+  }
 
   useEffect(()=>{
           (async () => {
@@ -41,17 +48,17 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center mb-8">Pick Your Store</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {catalogues.map((catalogue, index) => (
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div key={catalogue.catalogueId} onClick={() => handleClickCatalog(catalogue.catalogueId)} className="bg-white shadow-lg rounded-lg overflow-hidden catalog-card">
             <Image
-              src="/store1.png" // Replace with your image path
+              src={catalogue.bannerImage} // Replace with your image path
               alt="Clothing Store"
               width={400}
               height={300}
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <h3 className="text-lg font-bold">Clothing Store</h3>
-              <p className="text-gray-600">Selling Best Clothes</p>
+              <h3 className="text-lg font-bold">{catalogue.storeName}</h3>
+              <p className="text-gray-600">{catalogue.description}</p>
             </div>
           </div>
           ))
